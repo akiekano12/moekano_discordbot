@@ -1,35 +1,35 @@
 #WaLLE
-import asyncio
-import urllib
-import requests
-import re
-import random
-import json
-import base64
-import binascii
-import collections
-import string
-import sys
-import os
-import urllib.parse
-from urllib.request import urlopen
-import io
-from dateutil.parser import parse
-import time
-import datetime
-from datetime import timezone
-from datetime import datetime
-import discord
-from discord.ext.commands import *
-from discord.ext import commands
-from colorthief import ColorThief
-from help_info import *
-from auth import *
+# import asyncio
+# import urllib
+# import requests
+# import re
+# import random
+# import json
+# import base64
+# import binascii
+# import collections
+# import string
+# import sys
+# import os
+# import urllib.parse
+# from urllib.request import urlopen
+# import io
+# from dateutil.parser import parse
+# import time
+# import datetime
+# from datetime import timezone
+# from datetime import datetime
+# import discord
+# from discord.ext.commands import *
+# from discord.ext import commands
+# from colorthief import ColorThief
+# from help_info import *
+# from auth import *
 
-import traceback
-import logging as log
+# import traceback
+# import logging as log
 
-from trim import trim_nl
+# from trim import trim_nl
 #from cogs.ctfmodel import TaskFailed
 import discord
 from discord.ext import commands,tasks
