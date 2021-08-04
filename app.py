@@ -197,120 +197,120 @@ async def on_member_join(member):
                  on_mobile = True
              await channel.send("Welcome to the Server {}!!\n On Mobile : {}".format(member.name,on_mobile))             
         
-# TODO : Filter out swear words from messages
-
-@bot.command()
-async def tell_me_about_yourself(ctx):
-    text = "My name is WallE!\n I was built by Kakarot2000. At present I have limited features(find out more by typing !help)\n :)"
-    await ctx.send(text)
-
-@bot.event
-async def on_message(message) :
-    # bot.process_commands(msg) is a couroutine that must be called here since we are overriding the on_message event
-    await bot.process_commands(message) 
-    if str(message.content).lower() == "hello":
-        await message.channel.send('Hi!')
-    
-    if str(message.content).lower() in ['swear_word1','swear_word2']:
-        await message.channel.purge(limit=1)
-
-@bot.event
-async def on_ready():
-    print(('<' + bot.user.name) + ' Online>')
-    print(discord.__version__)
-    await bot.change_presence(activity=discord.Game(name='!help / !report "issue"'))
-
-@bot.event
-async def on_message(message):
-    if 'who should I subscribe to?' in message.content:
-        choice = random.randint(1, 2)
-        
-        if choice == 1:
-            await message.channel.send('https://youtube.com/nullpxl')
-        
-        if choice == 2:
-            await message.channel.send('https://www.youtube.com/user/RootOfTheNull')
-    
-    await bot.process_commands(message)
-
-@bot.event
-async def on_error(evt_type, ctx):
-    if evt_type == 'on_message':
-        await ctx.send('An error has occurred... :disappointed:')
-    log.error(f'Ignoring exception at {evt_type}')
-    log.error(traceback.format_exc())
-
-
-@bot.event
-async def on_command_error(ctx, err):
-    if isinstance(err, MissingPermissions):
-        await ctx.send('You do not have permission to do that! ¯\_(ツ)_/¯')
-    elif isinstance(err, BotMissingPermissions):
-        await ctx.send(trim_nl(f''':cry: I can\'t do that. Please ask server ops
-        to add all the permission for me!
-        
-        ```{str(err)}```'''))
-    elif isinstance(err, DisabledCommand):
-        await ctx.send(':skull: Command has been disabled!')
-    elif isinstance(err, CommandNotFound):
-        await ctx.send('Invalid command passed. Use !help.')
-    elif isinstance(err, TaskFailed):
-        await ctx.send(f':bangbang: {str(err)}')
-    elif isinstance(err, NoPrivateMessage):
-        await ctx.send(':bangbang: This command cannot be used in PMs.')
-    else:
-        await ctx.send('An error has occurred... :disappointed:')
-        log.error(f'Ignoring exception in command {ctx.command}')
-        log.error(''.join(traceback.format_exception(type(err), err,
-                err.__traceback__)))
-
-# Sends the github link.
-@bot.command()
-async def source(ctx):
-    await ctx.send(src_fork)
-    await ctx.send(f'Forked from: {src}')
-
-@bot.command()
-async def help(ctx, page=None):
-    info = help_page if not page or page == '1' else help_page_2
-    await embed_help(ctx, 'Konichiwa welcome link start!', info)
-
-# Bot sends a dm to creator with the name of the user and their request.
-@bot.command()
-async def request(ctx, feature):
-    for cid in creator_id:
-        creator = bot.get_user(cid)
-        authors_name = str(ctx.author)
-        await creator.send(f''':pencil: {authors_name}: {feature}''')
-    await ctx.send(f''':pencil: Thanks, "{feature}" has been requested!''')
-
-# Bot sends a dm to creator with the name of the user and their report.
-@bot.command()
-async def report(ctx, error_report):
-    for cid in creator_id:
-        creator = bot.get_user(cid)
-        authors_name = str(ctx.author)
-        await creator.send(f''':triangular_flag_on_post: {authors_name}: {error_report}''')
-    await ctx.send(f''':triangular_flag_on_post: Thanks for the help, "{error_report}" has been reported!''')
+# # TODO : Filter out swear words from messages
 
 # @bot.command()
-# async def creator(ctx):
-#     await ctx.send(creator_info)
+# async def tell_me_about_yourself(ctx):
+#     text = "My name is WallE!\n I was built by Kakarot2000. At present I have limited features(find out more by typing !help)\n :)"
+#     await ctx.send(text)
 
-@bot.command()
-async def amicool(ctx):
-    authors_name = str(ctx.author)
+# @bot.event
+# async def on_message(message) :
+#     # bot.process_commands(msg) is a couroutine that must be called here since we are overriding the on_message event
+#     await bot.process_commands(message) 
+#     if str(message.content).lower() == "hello":
+#         await message.channel.send('Hi!')
     
-    if any((name in authors_name for name in cool_names)):
-        await ctx.send('You are very cool')
-    else:
-        await ctx.send('lolno')
-        await ctx.send('Psst, kid.  Want to be cool?  Find an issue and report it or request a feature you think would be cool.')
+#     if str(message.content).lower() in ['swear_word1','swear_word2']:
+#         await message.channel.purge(limit=1)
+
+# @bot.event
+# async def on_ready():
+#     print(('<' + bot.user.name) + ' Online>')
+#     print(discord.__version__)
+#     await bot.change_presence(activity=discord.Game(name='!help / !report "issue"'))
+
+# @bot.event
+# async def on_message(message):
+#     if 'who should I subscribe to?' in message.content:
+#         choice = random.randint(1, 2)
+        
+#         if choice == 1:
+#             await message.channel.send('https://youtube.com/nullpxl')
+        
+#         if choice == 2:
+#             await message.channel.send('https://www.youtube.com/user/RootOfTheNull')
+    
+#     await bot.process_commands(message)
+
+# @bot.event
+# async def on_error(evt_type, ctx):
+#     if evt_type == 'on_message':
+#         await ctx.send('An error has occurred... :disappointed:')
+#     log.error(f'Ignoring exception at {evt_type}')
+#     log.error(traceback.format_exc())
+
+
+# @bot.event
+# async def on_command_error(ctx, err):
+#     if isinstance(err, MissingPermissions):
+#         await ctx.send('You do not have permission to do that! ¯\_(ツ)_/¯')
+#     elif isinstance(err, BotMissingPermissions):
+#         await ctx.send(trim_nl(f''':cry: I can\'t do that. Please ask server ops
+#         to add all the permission for me!
+        
+#         ```{str(err)}```'''))
+#     elif isinstance(err, DisabledCommand):
+#         await ctx.send(':skull: Command has been disabled!')
+#     elif isinstance(err, CommandNotFound):
+#         await ctx.send('Invalid command passed. Use !help.')
+#     elif isinstance(err, TaskFailed):
+#         await ctx.send(f':bangbang: {str(err)}')
+#     elif isinstance(err, NoPrivateMessage):
+#         await ctx.send(':bangbang: This command cannot be used in PMs.')
+#     else:
+#         await ctx.send('An error has occurred... :disappointed:')
+#         log.error(f'Ignoring exception in command {ctx.command}')
+#         log.error(''.join(traceback.format_exception(type(err), err,
+#                 err.__traceback__)))
+
+# # Sends the github link.
+# @bot.command()
+# async def source(ctx):
+#     await ctx.send(src_fork)
+#     await ctx.send(f'Forked from: {src}')
+
+# @bot.command()
+# async def help(ctx, page=None):
+#     info = help_page if not page or page == '1' else help_page_2
+#     await embed_help(ctx, 'Konichiwa welcome link start!', info)
+
+# # Bot sends a dm to creator with the name of the user and their request.
+# @bot.command()
+# async def request(ctx, feature):
+#     for cid in creator_id:
+#         creator = bot.get_user(cid)
+#         authors_name = str(ctx.author)
+#         await creator.send(f''':pencil: {authors_name}: {feature}''')
+#     await ctx.send(f''':pencil: Thanks, "{feature}" has been requested!''')
+
+# # Bot sends a dm to creator with the name of the user and their report.
+# @bot.command()
+# async def report(ctx, error_report):
+#     for cid in creator_id:
+#         creator = bot.get_user(cid)
+#         authors_name = str(ctx.author)
+#         await creator.send(f''':triangular_flag_on_post: {authors_name}: {error_report}''')
+#     await ctx.send(f''':triangular_flag_on_post: Thanks for the help, "{error_report}" has been reported!''')
+
+# # @bot.command()
+# # async def creator(ctx):
+# #     await ctx.send(creator_info)
+
+# @bot.command()
+# async def amicool(ctx):
+#     authors_name = str(ctx.author)
+    
+#     if any((name in authors_name for name in cool_names)):
+#         await ctx.send('You are very cool')
+#     else:
+#         await ctx.send('lolno')
+#         await ctx.send('Psst, kid.  Want to be cool?  Find an issue and report it or request a feature you think would be cool.')
 
 
 
-if __name__ == "__main__" :
-     for extension in extensions:
-        bot.load_extension('cogs.' + extension)
-        bot.run(DISCORD_TOKEN)
-        bot.run(auth_token)
+# if __name__ == "__main__" :
+#      for extension in extensions:
+#         bot.load_extension('cogs.' + extension)
+#         bot.run(DISCORD_TOKEN)
+#         bot.run(auth_token)
